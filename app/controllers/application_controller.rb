@@ -11,6 +11,8 @@ class ApplicationController < ActionController::API
     with: :render_not_found_response
   )
 
+  private
+
   def render_unprocessable_entity_response(exception)
     msg =
       exception.record.errors.full_messages
@@ -19,5 +21,13 @@ class ApplicationController < ActionController::API
 
   def render_not_found_response(exception)
     render json: { error: exception.message }, status: :not_found
+  end
+
+  def authenticate_agent
+    if current_user.customer?
+     render json: msg, status: :unprocessable_entity
+    else
+     true
+    end
   end
 end

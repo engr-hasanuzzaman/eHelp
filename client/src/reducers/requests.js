@@ -30,12 +30,12 @@ const requests = handleActions({
 
   [ApiAction.ADD_REQUEST]: {
     next: (state, action) => [...state, request(state, action)],
-    throw: (state, action) => s
+    throw: (state, action) => state
   },
 
   [ApiAction.UPDATE_REQUEST]: {
     next: (state, action) => state.map(s => request(s, action)),
-    throw: (state, action) => action.payload
+    throw: (state, action) => state
   },
 
   [ApiAction.DELETE_REQUEST]: {

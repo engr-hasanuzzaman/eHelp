@@ -22,10 +22,11 @@ export default class App extends Component {
     }
 
     this.isAuthorize = this.isAuthorize.bind(this);
+    // this.IsCustomerUser = this.IsCustomerUser.bind(this);
   }
 
   isAuthorize(){
-    return this.props.user.jwt.length > 0
+    return this.props.user.role && (this.props.user.jwt.length > 0)
   }
 
   handleAddRequest(request){
@@ -35,6 +36,24 @@ export default class App extends Component {
     }
     this.props.addRequest(param);
   }
+
+  handleUpdateRequest(request){
+    const param = {
+      req: request,
+      jwt: this.props.user.jwt
+    }
+    console.log(' with in handleUpdateRequest');
+    console.log(request);
+    this.props.updateRequest(param);
+  }
+
+  // IsCustomerUser(){
+  //   console.log('----check user type---');
+  //   console.log(this.props.user);
+  //   console.log(this.props.user.role == 'customer');
+  //
+  //   return ()
+  // }
 
   render() {
     const { from } = this.props.location && this.props.location.state || '/'
@@ -61,7 +80,7 @@ export default class App extends Component {
                 {this.isAuthorize() &&
                   <Route exact path='/' render={(props) => (
                     <RequestList
-                      onUpdateRequest={this.props.updateRequest}
+                      onUpdateRequest={this.handleUpdateRequest.bind(this)}
                       onDeleteRequest={this.props.deleteRequest}
                     />
                   )}/>

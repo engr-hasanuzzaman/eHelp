@@ -49,19 +49,17 @@ export default {
       })
   },
 
-  updateRequest: (req) => {
-    return new Promise((resolve, reject) => {
-      request
-        .patch(url + '/' + request.id)
-        .send({ request: req })
-        .end((err, res) => {
-          if (!res || res.status === 404) {
-            reject()
-          } else {
-            resolve(res.body)
-          }
-        })
-    })
+  updateRequest: (param) => {
+    const {req, jwt} = param;
+    console.log('delete Request params');
+    console.log(param);
+    return apiAxios.patch(('/' + req.id), {request: req} ,{ headers: formatToken(jwt)})
+      .then(res => {
+        return req;
+      })
+      .catch(error => {
+        throw error;
+      })
   },
 
   deleteRequest: (param) => {

@@ -14,27 +14,26 @@ class RequestList extends Component {
         <Request
           key={request.id}
           request={request}
-          onUpdate={this.props.updateRequest}
+          onUpdateRequest={this.props.onUpdateRequest}
           onDelete={this.props.onDeleteRequest}
+          IsCustomerUser={this.props.role === 'customer'}
         />
       )
     })
 
     return (
-      <div className="row">
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th width="20%">Title</th>
-              <th>Description</th>
-              <th width="20%">Status</th>
-              <th width="10%">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {requesNodes}
-          </tbody>
-        </table>
+      <div className='request-list'>
+        <div className="row header">
+            <div className='row'>
+            <div className='col-sm-3'> Title </div>
+            <div className='col-sm-3'>Description </div>
+            <div className='col-sm-3'>Status</div>
+            <div className='col-sm-3'>Action</div>
+            </div>
+        </div>
+        <div className='body'>
+          {requesNodes}
+        </div>
       </div>
     )
   }
@@ -42,11 +41,12 @@ class RequestList extends Component {
 
 RequestList.propTypes = {
   updateRequest: PropTypes.func.isRequired,
-  deleteRequest: PropTypes.func.isRequired
+  deleteRequest: PropTypes.func.isRequired,
+  role: PropTypes.string.isRequired
 }
 
 const mapStateToProps = (state) => {
-  return { requests: state.requests }
+  return { requests: state.requests, role: state.user.role }
 }
 
 RequestList = connect(

@@ -9,23 +9,26 @@ class RequestForm extends Component {
 
   render() {
     const form = this.props.form
-    const { changeOrder, changeTitle, onAddRequest } = this.props
+    const { changeDescription, changeTitle, onAddRequest } = this.props
 
     return (
       <div className="row">
         <form className="form-horizontal" onSubmit={(e) => this.handleSubmit(e)}>
-          <div className="form-group col-md-2">
-            <input
+          <div className="form-group col-md-12">
+            <textarea
               className="form-control"
-              type="number"
-              value={form.order}
-              onChange={(e) => changeOrder(e.target.value)}
+              type="textarea"
+              placeholder='request description'
+              rows="5"
+              value={form.description}
+              onChange={(e) => changeDescription(e.target.value)}
             />
           </div>
-          <div className="form-group col-md-8">
+          <div className="form-group col-md-12">
             <input
               className="form-control"
               type="text"
+              placeholder='request title'
               value={form.title}
               onChange={(e) => changeTitle(e.target.value)}
             />

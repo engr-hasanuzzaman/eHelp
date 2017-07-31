@@ -6,7 +6,7 @@ class Request < ApplicationRecord
   # constant & enum
   #
 
-  enum status: %i[pending precessing processed]
+  enum status: %i[pending processing processed]
 
   #
   # validations

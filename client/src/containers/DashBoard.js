@@ -20,12 +20,22 @@ class DashBoard extends Component {
     this.props.deleteRequest(param);
   }
 
+  handleUpdateRequest(request){
+    const param = {
+      req: request,
+      jwt: this.props.jwt
+    }
+    console.log(' with in handleUpdateRequest');
+    console.log(request);
+    this.props.updateRequest(param);
+  }
+
   render() {
     return (
       <div className="App">
         <h1>Your request list</h1>
         <RequestList
-          onUpdateRequest={this.props.updateRequest}
+          onUpdateRequest={this.handleUpdateRequest.bind(this)}
           onDeleteRequest={this.handleDeleteRequest.bind(this)}
         />
       </div>

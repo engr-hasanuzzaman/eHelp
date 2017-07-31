@@ -4,15 +4,15 @@ import * as ApiAction from '../constants/api'
 
 const initialState = {
   title: '',
-  order: 1,
+  description: '',
   completed: false,
   disabled: true
 }
 
 const form = handleActions({
-  [UiAction.CHANGE_ORDER]: (state, action) => ({
+  [UiAction.CHANGE_DESCRIPTION]: (state, action) => ({
     ...state,
-    order: action.payload
+    description: action.payload
   }),
 
   [UiAction.CHANGE_TITLE]: (state, action) => ({
