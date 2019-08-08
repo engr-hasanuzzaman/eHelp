@@ -32,6 +32,8 @@ module EHelp
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
     config.middleware.use Rack::MethodOverride
+    config.middleware.use ActionDispatch::Flash
+
     config.eager_load = true
 
     config.middleware.insert_before 0, Rack::Cors do
